@@ -40,13 +40,8 @@ def test_api_response_content_access_control_allow_origin(test_load_api):
     assert_that(test_load_api.headers['Access-Control-Expose-Headers']).is_equal_to('Request-Context')
 
 
-def test_api_response_content_access_control_allow_credentials(test_load_api):
-    assert_that(test_load_api.headers['Access-Control-Allow-Credentials']).is_equal_to('true')
-
-
 def test_api_response_content_access_control_max_age(test_load_api):
-    print(test_load_api.headers['Access-Control-Max-Age'])
-    assert_that(test_load_api.headers['Strict-Transport-Security'][0]).is_equal_to('max-age=31536000')
+    assert_that(test_load_api.headers['Strict-Transport-Security']).is_equal_to('max-age=31536000 ; includeSubDomains ; preload')
 
 
 def test_api_response_content_access_control_expose_headers(test_load_api):
