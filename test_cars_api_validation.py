@@ -5,19 +5,21 @@ from assertpy import assert_that, soft_assertions, fail
 import requests
 import json
 
+
 @pytest.fixture(scope='module')
 def test_load_api():
     response = requests.get('https://vpic.nhtsa.dot.gov/api/vehicles/getallmanufacturers?format=json')
     return response
 
+
 def test_find_all_manufacturers(test_load_api):
     all_manufacturers = test_load_api.json()['Results']
     assert_that(test_load_api.status_code).is_equal_to(200)
     for manufacturer in all_manufacturers:
-            print(manufacturer['Mfr_Name'])
-            assert_that(manufacturer['Mfr_Name']).is_not_none()
-            assert_that(manufacturer['Mfr_Name']).is_not_empty()
-            assert_that(manufacturer['Mfr_Name']).is_not_equal_to('')
+        print(manufacturer['Mfr_Name'])
+        assert_that(manufacturer['Mfr_Name']).is_not_none()
+        assert_that(manufacturer['Mfr_Name']).is_not_empty()
+        assert_that(manufacturer['Mfr_Name']).is_not_equal_to('')
 
 
 def test_find_all_manufacturers_in_usa(test_load_api):
@@ -33,7 +35,7 @@ def test_find_all_manufacturers_in_usa(test_load_api):
 def test_find_all_manufacturers_in_mexico(test_load_api):
     all_manufacturers = test_load_api.json()['Results']
     assert_that(test_load_api.status_code).is_equal_to(200)
-    print("*\n" * 20)
+    print("*" * 20)
     for manufacturer in all_manufacturers:
         if manufacturer['Country'] == "MEXICO":
             print(manufacturer['Mfr_Name'])
@@ -151,7 +153,6 @@ def test_find_all_manufacturers_in_india(test_load_api):
             assert_that(manufacturer['Mfr_Name']).is_not_equal_to('')
 
 
-
 def test_find_all_manufacturers_in_china(test_load_api):
     all_manufacturers = test_load_api.json()['Results']
     assert_that(test_load_api.status_code).is_equal_to(200)
@@ -161,7 +162,6 @@ def test_find_all_manufacturers_in_china(test_load_api):
             print(manufacturer['Mfr_Name'])
             assert_that(manufacturer['Mfr_Name']).is_not_none()
             assert_that(manufacturer['Mfr_Name']).is_not_equal_to('')
-
 
 
 def test_find_all_manufacturers_in_taiwan(test_load_api):
@@ -175,7 +175,6 @@ def test_find_all_manufacturers_in_taiwan(test_load_api):
             assert_that(manufacturer['Mfr_Name']).is_not_equal_to('')
 
 
-
 def test_find_all_manufacturers_in_thailand(test_load_api):
     all_manufacturers = test_load_api.json()['Results']
     assert_that(test_load_api.status_code).is_equal_to(200)
@@ -185,7 +184,6 @@ def test_find_all_manufacturers_in_thailand(test_load_api):
             print(manufacturer['Mfr_Name'])
             assert_that(manufacturer['Mfr_Name']).is_not_none()
             assert_that(manufacturer['Mfr_Name']).is_not_equal_to('')
-
 
 
 def test_find_all_manufacturers_in_turkey(test_load_api):
@@ -199,7 +197,6 @@ def test_find_all_manufacturers_in_turkey(test_load_api):
             assert_that(manufacturer['Mfr_Name']).is_not_equal_to('')
 
 
-
 def test_find_all_manufacturers_in_czech_republic(test_load_api):
     all_manufacturers = test_load_api.json()['Results']
     assert_that(test_load_api.status_code).is_equal_to(200)
@@ -209,7 +206,6 @@ def test_find_all_manufacturers_in_czech_republic(test_load_api):
             print(manufacturer['Mfr_Name'])
             assert_that(manufacturer['Mfr_Name']).is_not_none()
             assert_that(manufacturer['Mfr_Name']).is_not_equal_to('')
-
 
 
 def test_find_all_manufacturers_in_brazil(test_load_api):
@@ -223,7 +219,6 @@ def test_find_all_manufacturers_in_brazil(test_load_api):
             assert_that(manufacturer['Mfr_Name']).is_not_equal_to('')
 
 
-
 def test_find_all_manufacturers_in_slovakia_(test_load_api):
     all_manufacturers = test_load_api.json()['Results']
     assert_that(test_load_api.status_code).is_equal_to(200)
@@ -233,7 +228,6 @@ def test_find_all_manufacturers_in_slovakia_(test_load_api):
             print(manufacturer['Mfr_Name'])
             assert_that(manufacturer['Mfr_Name']).is_not_none()
             assert_that(manufacturer['Mfr_Name']).is_not_equal_to('')
-
 
 
 def test_find_all_manufacturers_in_slovenia_(test_load_api):
@@ -247,7 +241,6 @@ def test_find_all_manufacturers_in_slovenia_(test_load_api):
             assert_that(manufacturer['Mfr_Name']).is_not_equal_to('')
 
 
-
 def test_find_all_manufacturers_in_south_africa_(test_load_api):
     all_manufacturers = test_load_api.json()['Results']
     assert_that(test_load_api.status_code).is_equal_to(200)
@@ -257,7 +250,6 @@ def test_find_all_manufacturers_in_south_africa_(test_load_api):
             print(manufacturer['Mfr_Name'])
             assert_that(manufacturer['Mfr_Name']).is_not_none()
             assert_that(manufacturer['Mfr_Name']).is_not_equal_to('')
-
 
 
 def test_find_the_number_of_cars_available(test_load_api):
@@ -354,5 +346,3 @@ def test_find_cars_by_mfr_id_965(test_load_api):
     results = test_load_api.json()["Results"]
     assert_that(results[9]["Mfr_ID"]).is_equal_to(965)
     print(results[9]["Mfr_Name"])
-
-

@@ -4,10 +4,12 @@ import pytest
 from assertpy import assert_that, soft_assertions, fail
 import requests
 
+
 @pytest.fixture(scope='module')
 def test_load_api():
     response = requests.get('https://vpic.nhtsa.dot.gov/api/vehicles/getallmanufacturers?format=json')
     return response
+
 
 def test_api_status_code(test_load_api):
     assert_that(test_load_api.status_code).is_equal_to(200)
@@ -41,10 +43,10 @@ def test_api_response_content_access_control_allow_origin(test_load_api):
 
 
 def test_api_response_content_access_control_max_age(test_load_api):
-    assert_that(test_load_api.headers['Strict-Transport-Security']).is_equal_to('max-age=31536000 ; includeSubDomains ; preload')
+    assert_that(test_load_api.headers['Strict-Transport-Security']).is_equal_to(
+        'max-age=31536000 ; includeSubDomains ; preload')
 
 
 def test_api_response_content_access_control_expose_headers(test_load_api):
     print(test_load_api.headers['Access-Control-Expose-Headers'])
     assert_that(test_load_api.headers['Access-Control-Expose-Headers']).is_equal_to('Request-Context')
-
